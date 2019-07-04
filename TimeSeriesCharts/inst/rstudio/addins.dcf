@@ -1,0 +1,4 @@
+Name: TimeSeriesCharts
+Description: A shiny app to visualize time series
+Binding: createTimeSeriesCharts
+Interactive: true

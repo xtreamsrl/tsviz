@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1562248933646.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1144911262",
+    "id" : "1D31BEF4",
+    "lastKnownWriteTime" : 1562000551,
+    "last_content_update" : 1562000551,
+    "path" : "~/trial/R/hello.R",
+    "project_path" : null,
+    "properties" : {
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

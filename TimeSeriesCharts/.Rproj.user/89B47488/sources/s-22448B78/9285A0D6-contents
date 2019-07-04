@@ -1,0 +1,202 @@
+createTimeSeriesCharts <- function() {
+
+  library(rstudioapi)
+  library(miniUI)
+  library(shiny)
+  library(ggplot2)
+  #library(plotly)
+  library(rlang)
+
+
+
+  entered <- function(string) {
+    !is.null(string) && nzchar(string)
+  }
+
+
+  search_df<- function(){
+
+    # Container
+    c <- c()
+
+    # Function to tell which place an object has in the workspace
+    w <- function(x) {
+      ls <- ls(envir = .GlobalEnv)
+      return(which(ls == x))
+    }
+
+    # Which object is a dataframe?
+    for (data in ls(envir = .GlobalEnv)) {
+      if (any(class(eval(parse(text = data))) == "data.frame")) {
+        c[w(data)] <- data
+      }
+    }
+
+    # Return all non-NA values
+    return(c[!is.na(c)])
+
+    # Delete the rest
+    rm(w)
+    rm(c)
+
+  }
+
+  ui <- miniPage(
+    gadgetTitleBar("Visualize time series"),
+    miniTabstripPanel(
+      miniTabPanel( "Line_plot", icon = icon("chart-line"),
+                    fillRow(
+                    miniContentPanel(
+                      selectInput(label = "Select your dataset:",
+                                  inputId = "dataset",
+                                  choices = c("", search_df())),
+
+                      uiOutput("variable_choise")),
+
+
+            miniContentPanel(plotOutput("linePlot"))
+      )
+    )
+    )
+
+
+
+    # miniTabPanel( "Line Plot", icon = icon("chart-line"),
+    #               #fillRow(
+    #                 miniContentPanel(
+    #                   #select variable
+    #                   uiOutput("variable_choise"))
+    #                 #   selectInput(inputId = "time_column", "Variabile temporale", choices = NULL),
+    #                 #   selectizeInput(inputId = "line_columns", "Altre variabili", choices = NULL, multiple = TRUE))
+    #                 # ),
+    #                 # miniContentPanel(
+    #                 #   plotlyOutput("line_plot")
+    #                 # )
+    #               #)
+    )
+  #)
+
+  server <- function(input, output, session){
+
+    # rv <- reactiveValues(
+    #   code = NULL
+    # )
+    # Was a dataset selected?
+    data <- reactive({
+      validate(
+        need(input$dataset != "", "Please select a data set")
+      )
+      get(input$dataset)
+    })
+
+
+
+    time_columns <- reactive({
+      # time_series_df() %>%
+      #   select_if(is.Date) %>%
+      #   colnames()ggplot(data = time_df) +geom_line( x=Date,y=High)
+      input$time_columns
+    })
+
+
+    numeric_columns <- reactive({
+      # time_series_df() %>%
+      #   select_if(is.numeric) %>%ggplot(data = time_df) +geom_line( x=Date,y=High)
+      #   colnames()
+      validate(
+        if(is.null(input$numeric_columns)==FALSE){
+          need(mode(data()[[input$numeric_columns]]) == "numeric", "Please pick a numeric variable")
+        }
+      )
+      input$numeric_columns
+    })
+
+
+
+    # reactiveLineCheck <- reactive({
+    #   (entered(input$dataset) && entered(input$time_columns) && entered(input$numeric_columns))
+    # })
+
+
+#
+#     observe({
+#
+#       if(reactiveLineCheck()){
+#         code = ""
+#         code <- paste0(code,"ggplot(data = ",input$dataset,", aes(", input$time_columns,",",input$numeric_columns,")) +geom_line()")
+#
+#       }
+#       else{
+#         return("Select line variables first")
+#       }
+#       return(code)
+#       rv$code <- code
+#     })
+
+
+
+
+    # makeplot <- reactive({
+    #
+    #   if (!reactiveLineCheck()) {
+    #     return(NULL)
+    #   } else {
+    #   command <- rv$code
+    #   eval(parse(text = command), envir = globalenv())
+    #   }
+    # })
+
+
+    output$variable_choise <- renderUI({
+      #col.names <- colnames(data())
+      tagList(
+        selectInput(inputId = "time_columns",
+                    label = "Select time variable",
+                    choices =c("",colnames(data()))),
+        selectizeInput(inputId = "numeric_columns",
+                       label = "select numeric variable",
+                       choices = c("",colnames(data())))
+      )
+    })
+
+    output$linePlot <- renderPlot({
+      req(input$time_columns, input$numeric_columns)
+      g<-ggplot(data = data()) +geom_line(x=time_columns(),y=numeric_columns())
+      g
+    })
+
+    # output$line_plot <- renderPlotly({
+    #   plot_ly(time_series_df(), x = ~ get(input$time_columns), y = ~ get(input$numeric_columns[1]), type = "scatter", mode = "markers", name = input$y_columns[1]) %>%
+    #     add_trace(y = ~ get(input$x_column), type = "scatter", mode = "lines", line = list(color = "black"), name = input$x_column)
+    # })
+
+    # ggplot(yt.views, aes(Date, Views)) + geom_line() +
+    #   scale_x_date(format = "%b-%Y") + xlab("") + ylab("Daily Views")
+
+
+
+    # output$line_plot <- renderPlotly({
+    #   req(input$time_column, input$line_columns)
+    #   plot_ly(time_series_df(), x = ~ get(input$time_column), y = ~ get(input$line_columns[1]), type = "scatter", mode = "lines", name = input$line_columns[1])
+    #
+    #     })
+
+
+
+    observeEvent(input$done, {
+      #code <- rv$code
+      if (nzchar(input$dataset) && nzchar(input$time_columns) && nzchar(input$numeric_columns)) {
+      code <- paste0("ggplot(data = ",input$dataset,") +geom_line( x=", input$time_columns,",y=",input$numeric_columns,")")
+      rstudioapi::insertText(text = code)}
+      # code <- expr_deparse(output$line_plot, width = 1e4)
+      # rstudioapi::insertText(text = code)
+      stopApp()
+    })
+
+  }
+
+
+
+  runGadget(shinyApp(ui, server), viewer = paneViewer())
+
+}
