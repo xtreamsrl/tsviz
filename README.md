@@ -13,6 +13,9 @@ R addin to visualize time series plots
   # Functionalities
 
   > Visualize the dataset of interest
+
   > Time Series Line Plot
+
   > Scatter plot
+  
   > Plot autocorrelation and partial autocorrelation functions
