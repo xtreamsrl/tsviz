@@ -1,0 +1,5 @@
+Name: Explore Time Series
+Description: Easy and interactive time series exploration
+Binding: tsviz
+Interactive: true
+

@@ -3,9 +3,9 @@ stableColumnLayout <- function(...) {
   n <- length(dots)
   width <- 12 / n
   class <- sprintf("col-xs-%s col-md-%s", width, width)
-  fluidRow(
+  shiny::fluidRow(
     lapply(dots, function(el) {
-      div(class = class, el)
+      shiny::div(class = class, el)
     })
   )
 }

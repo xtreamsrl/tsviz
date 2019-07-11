@@ -1,4 +1,5 @@
 .Rproj.user
+.github/
+.Rbuildignore
 .Rhistory
-.RData
-.Ruserdata
+tsviz.Rproj

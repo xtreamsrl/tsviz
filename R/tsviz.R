@@ -1,8 +1,8 @@
-#' timeSeriesExploration
-#' A plugin to make time series exploration easier
+#' tsviz
+#' Easy and interactive visualization of time series
 #'
 #' @export
-timeSeriesExploration <- function() {
+tsviz <- function() {
   ui <- miniUI::miniPage(
     miniUI::gadgetTitleBar("Time Series Visualization"),
 
@@ -65,7 +65,7 @@ timeSeriesExploration <- function() {
       miniUI::miniTabPanel("Correlogram",
         icon = shiny::icon("bar-chart"),
 
-        fillCol(
+        shiny::fillCol(
           miniUI::miniContentPanel(
             shiny::selectInput(
               label = "select your variable",
@@ -74,7 +74,7 @@ timeSeriesExploration <- function() {
             ),
 
             shiny::sliderInput(inputId = "lag", label = "Lag variable", min = 12, max = 48, value = 24),
-            fillRow(
+            shiny::fillRow(
               miniUI::miniContentPanel(plotly::plotlyOutput("Correlogram")),
               miniUI::miniContentPanel(plotly::plotlyOutput("PartialCorrelogram"))
             )
@@ -246,7 +246,7 @@ timeSeriesExploration <- function() {
   }
 
 
-  viewer <- dialogViewer(
+  viewer <- shiny::dialogViewer(
     dialogName = "Visualize Time Series",
     height = 1000,
     width = 1600
