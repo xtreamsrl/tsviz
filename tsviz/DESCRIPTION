@@ -1,4 +1,4 @@
-Package: TimeSeriesExploration
+Package: tsviz
 Type: Package
 Title: Easy and interactive time series visualization
 Version: 0.1.0
