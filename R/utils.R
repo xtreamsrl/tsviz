@@ -11,28 +11,12 @@ stableColumnLayout <- function(...) {
 }
 
 
-search_df <- function() {
-
-  # Container
-  c <- c()
-
-  # Function to tell which place an object has in the workspace
-  w <- function(x) {
-    ls <- ls(envir = .GlobalEnv)
-    return(which(ls == x))
+get_data_frames_in_env <- function(envir = .GlobalEnv) {
+  objs <- ls(envir = envir)
+  mask <- sapply(objs, function(x) any(is.data.frame(get(x, envir = envir))))
+  res <- list()
+  if(any(mask)){
+    res <- objs[mask]
   }
-
-  # Which object is a dataframe?
-  for (data in ls(envir = .GlobalEnv)) {
-    if (any(class(eval(parse(text = data))) == "data.frame")) {
-      c[w(data)] <- data
-    }
-  }
-
-  # Return all non-NA values
-  return(c[!is.na(c)])
-
-  # Delete the rest
-  rm(w)
-  rm(c)
+  res
 }

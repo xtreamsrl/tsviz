@@ -15,7 +15,7 @@ tsviz <- function() {
             shiny::selectInput(
               label = "Select your dataset:",
               inputId = "dataset",
-              choices = c(search_df())
+              choices = c(get_data_frames_in_env())
             )
           ),
           shiny::dataTableOutput("table")
