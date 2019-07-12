@@ -2,4 +2,5 @@
 
 export("%>%")
 export(tsviz)
+importFrom(forecast,Acf)
 importFrom(magrittr,"%>%")

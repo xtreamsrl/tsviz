@@ -1,39 +1,36 @@
 #' tsviz
 #' Easy and interactive visualization of time series
 #'
+#' @importFrom forecast Acf
 #' @export
 tsviz <- function() {
   ui <- miniUI::miniPage(
-    miniUI::gadgetTitleBar("Time Series Visualization"),
+    miniUI::gadgetTitleBar("tsviz - time series visualization", left = NULL, right = NULL),
 
     miniUI::miniTabstripPanel(
-      miniUI::miniTabPanel("Data",
+      miniUI::miniTabPanel("data",
         icon = shiny::icon("table"),
 
         miniUI::miniContentPanel(
-          stableColumnLayout(
             shiny::selectInput(
-              label = "Select your dataset:",
+              label = "Dataset:",
               inputId = "dataset",
               choices = c(get_data_frames_in_env())
-            )
           ),
           shiny::dataTableOutput("table")
         )
       ),
 
-      miniUI::miniTabPanel("Line plot",
+      miniUI::miniTabPanel("Line chart",
         icon = shiny::icon("chart-line"),
-
-
         miniUI::miniContentPanel(
           shiny::selectInput(
-            label = "Select time variable",
+            label = "Time variable",
             inputId = "time_column",
             choices = NULL
           ),
           shiny::selectizeInput(
-            label = "Select your variables:",
+            label = "Chart ariables:",
             inputId = "line_columns",
             choices = NULL,
             multiple = TRUE
@@ -46,12 +43,12 @@ tsviz <- function() {
         icon = shiny::icon("braille"),
         miniUI::miniContentPanel(
           shiny::selectInput(
-            label = "Select x variable",
+            label = "X variable",
             inputId = "x_variable",
             choices = NULL
           ),
           shiny::selectizeInput(
-            label = "Select y variables:",
+            label = "Y variables:",
             inputId = "y_variables",
             choices = NULL,
             multiple = TRUE
@@ -61,22 +58,20 @@ tsviz <- function() {
       ),
 
 
-
       miniUI::miniTabPanel("Correlogram",
         icon = shiny::icon("bar-chart"),
 
         shiny::fillCol(
           miniUI::miniContentPanel(
             shiny::selectInput(
-              label = "select your variable",
+              label = "Variable",
               inputId = "corr_variable",
               choices = NULL
             ),
-
-            shiny::sliderInput(inputId = "lag", label = "Lag variable", min = 12, max = 48, value = 24),
+            shiny::sliderInput(inputId = "lag", label = "Lag variable", min = 10, max = 100, value = 30),
             shiny::fillRow(
-              miniUI::miniContentPanel(plotly::plotlyOutput("Correlogram")),
-              miniUI::miniContentPanel(plotly::plotlyOutput("PartialCorrelogram"))
+              miniUI::miniContentPanel(plotly::plotlyOutput("correlogram")),
+              miniUI::miniContentPanel(plotly::plotlyOutput("partial_correlogram"))
             )
           )
         )
@@ -87,9 +82,9 @@ tsviz <- function() {
 
   server <- function(input, output, session) {
     data <- shiny::reactive({
+      req(input$dataset)
       get(input$dataset, envir = .GlobalEnv)
     })
-
 
     time_columns <- shiny::reactive({
       data() %>%
@@ -130,7 +125,6 @@ tsviz <- function() {
       )
     })
 
-
     shiny::observe({
       shiny::updateSelectInput(
         session = session,
@@ -139,7 +133,6 @@ tsviz <- function() {
         selected = numeric_columns()[1]
       )
     })
-
 
     shiny::observe({
       shiny::updateSelectizeInput(
@@ -150,29 +143,29 @@ tsviz <- function() {
       )
     })
 
-    output$Correlogram <- plotly::renderPlotly({
+    output$correlogram <- plotly::renderPlotly({
       req(input$corr_variable, input$lag)
 
-      autocorr <- forecast::ggAcf(data()[, input$corr_variable], lag.max = input$lag, type = "correlation") +
-        ggplot2::ggtitle("Autocorrelation function (ACF)")
-      ACF_chart <- plotly::ggplotly(autocorr)
-      ACF_chart
+      (forecast::ggAcf(data()[, input$corr_variable], lag.max = input$lag, type = "correlation") +
+        ggplot2::ggtitle("Autocorrelation function (ACF)")) %>%
+        plotly::ggplotly() %>%
+        plotly::config(displaylogo = FALSE)
     })
 
-    output$PartialCorrelogram <- plotly::renderPlotly({
+    output$partial_correlogram <- plotly::renderPlotly({
       req(input$corr_variable, input$lag)
 
-      parautocorr <- forecast::ggPacf(data()[, input$corr_variable], lag.max = input$lag) +
-        ggplot2::ggtitle("Partial Autocorrelation function (PACF)")
-      PACF_chart <- plotly::ggplotly(parautocorr)
-      PACF_chart
+      (forecast::ggPacf(data()[, input$corr_variable], lag.max = input$lag) +
+        ggplot2::ggtitle("Partial Autocorrelation function (PACF)")) %>%
+        plotly::ggplotly() %>%
+        plotly::config(displaylogo = FALSE)
     })
 
     output$line_plot <- plotly::renderPlotly({
       req(input$time_column, input$line_columns)
 
-
-      chart <- plotly::plot_ly(data(),
+      chart <- plotly::plot_ly(
+        data(),
         x = ~ get(input$time_column),
         y = ~ get(input$line_columns[1]),
         type = "scatter",
@@ -190,7 +183,7 @@ tsviz <- function() {
 
       chart %>%
         plotly::layout(
-          xaxis = list(title = "Data"),
+          xaxis = list(title = "Date"),
           yaxis = list(title = "Value"),
           legend = list(orientation = "h", xanchor = "center", yanchor = "top", x = 0.5, y = 1.2)
         ) %>%
@@ -234,22 +227,17 @@ tsviz <- function() {
         plotly::config(displaylogo = FALSE)
     })
 
+    output$table <- shiny::renderDataTable(data())
 
-    output$table <- shiny::renderDataTable({
-      data <- data()
-      data
-    })
-
-    shiny::observeEvent(input$done, {
-      shiny::stopApp()
-    })
   }
 
 
   viewer <- shiny::dialogViewer(
     dialogName = "Visualize Time Series",
-    height = 1000,
-    width = 1600
+    height = 700,
+    width = 1000
   )
+
+
   shiny::runGadget(ui, server, viewer = viewer)
 }
