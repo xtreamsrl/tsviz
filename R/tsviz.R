@@ -1,5 +1,10 @@
-#' tsviz
 #' Easy and interactive visualization of time series
+#'
+#' An RStudio addin to visualize time series.
+#' Time series are supposed to be contained into a \code{data.frame} object in the global environment,
+#' with the following format:
+#' - a column of type \code{Date}
+#' - one of more numeric columns
 #'
 #' @importFrom forecast Acf
 #' @export
@@ -12,10 +17,10 @@ tsviz <- function() {
         icon = shiny::icon("table"),
 
         miniUI::miniContentPanel(
-            shiny::selectInput(
-              label = "Dataset:",
-              inputId = "dataset",
-              choices = c(get_data_frames_in_env())
+          shiny::selectInput(
+            label = "Dataset:",
+            inputId = "dataset",
+            choices = c(get_data_frames_in_env())
           ),
           shiny::dataTableOutput("table")
         )
@@ -228,7 +233,6 @@ tsviz <- function() {
     })
 
     output$table <- shiny::renderDataTable(data())
-
   }
 
 

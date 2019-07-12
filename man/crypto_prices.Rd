@@ -3,7 +3,7 @@
 \docType{data}
 \name{crypto_prices}
 \alias{crypto_prices}
-\title{Prices of 3 crypto currencies between 2016-04-01 and 2019-07-01}
+\title{Prices of 3 crypto currencies}
 \format{A data frame with 1174 rows and 4 variables:
 \itemize{
 \item \emph{Date}: date when the price was recorded
@@ -16,6 +16,7 @@ crypto_prices
 }
 \description{
 A dataset closing prices for Litecoin, Bitcoin and Ethereum
-on 1174 days. Prices are recorded in US dollars.
+on 1174 days, between 2016-04-01 and 2019-07-01.
+Prices are recorded in US dollars.
 }
 \keyword{datasets}

@@ -2,12 +2,16 @@
 % Please edit documentation in R/tsviz.R
 \name{tsviz}
 \alias{tsviz}
-\title{tsviz
-Easy and interactive visualization of time series}
+\title{Easy and interactive visualization of time series}
 \usage{
 tsviz()
 }
 \description{
-tsviz
-Easy and interactive visualization of time series
+An RStudio addin to visualize time series.
+Time series are supposed to be contained into a \code{data.frame} object in the global environment,
+with the following format:
+\itemize{
+\item a column of type \code{Date}
+\item one of more numeric columns
+}
 }
