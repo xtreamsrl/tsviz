@@ -30,8 +30,12 @@ You can install the released version of tsviz from
 Or install the development version from Github:
 
 ``` r
-# detools::install_packages("donlelef/tsviz")
+# devtools::install_packages("donlelef/tsviz")
 ```
+
+Once you’ve installed the package, you don’t need to load it with
+`library()`, the addins are installed on your machine as part of the
+package install process.
 
 ## Example
 
@@ -44,6 +48,6 @@ prices <- crypto_prices
 
 Then, we can run the addin:
 
-![Tutorial gif](pics/tsviz.gif)
+![Tutorial gif](reference/figure/tsviz.gif)
 
 That’s it.

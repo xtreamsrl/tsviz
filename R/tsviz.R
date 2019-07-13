@@ -238,7 +238,7 @@ tsviz <- function() {
 
     output$table <- shiny::renderDataTable(data())
 
-    shinyhelper::observe_helpers()
+    shinyhelper::observe_helpers(help_dir = 'reference/helpfile/')
   }
 
 
