@@ -21,7 +21,7 @@ tsviz <- function() {
             label = "Dataset:",
             inputId = "dataset",
             choices = c(get_time_series_data_frames_in_env())
-          ),
+          ) %>% shinyhelper::helper(content = 'Dataset selection'),
           shiny::dataTableOutput("table")
         )
       ),
@@ -229,6 +229,8 @@ tsviz <- function() {
     })
 
     output$table <- shiny::renderDataTable(data())
+
+    shinyhelper::observe_helpers()
   }
 
 

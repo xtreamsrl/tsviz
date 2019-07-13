@@ -30,4 +30,5 @@ Imports:
     miniUI (>= 0.1.1),
     forecast (>= 8.7),
     ggplot2 (>= 3.0),
-    magrittr
+    magrittr,
+    shinyhelper (>= 0.3.1)
