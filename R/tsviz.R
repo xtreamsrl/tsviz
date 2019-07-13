@@ -87,7 +87,9 @@ tsviz <- function() {
 
   server <- function(input, output, session) {
     data <- shiny::reactive({
-      req(input$dataset)
+      validate(
+        need(input$dataset != "", "Looks like none of your data.frames contains a time series!")
+      )
       get(input$dataset, envir = .GlobalEnv)
     })
 
