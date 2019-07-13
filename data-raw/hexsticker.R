@@ -20,9 +20,9 @@ hexSticker::sticker(p,
   s_height = 0.8,
   h_fill = "#001e51",
   h_color = "#11b52b",
-  filename = "reference/figure/tsviz_large.png"
+  filename = "man/figures/tsviz_large.png"
 )
 
-shinyhelper <- magick::image_read("reference/figure/tsviz_large.png")
+shinyhelper <- magick::image_read("man/figures/tsviz_large.png")
 magick::image_scale(shinyhelper, "130") %>%
-  magick::image_write(image=., path = "reference/figure/tsviz.png", format = "png")
+  magick::image_write(image = ., path = "man/figures/tsviz.png", format = "png")

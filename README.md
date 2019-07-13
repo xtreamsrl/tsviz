@@ -14,7 +14,7 @@ status](https://www.r-pkg.org/badges/version/tsviz)](https://CRAN.R-project.org/
 status](https://travis-ci.org/donlelef/tsviz.svg?branch=master)](https://travis-ci.org/donlelef/tsviz)
 <!-- badges: end -->
 
-<img src="reference/figure/tsviz.png" align="right"/>
+<img src="man/figures/tsviz.png" align="right"/>
 
 An RStudio addin to provide easy and interactive time series
 visualization. To be visible to the addin, time series must be stored in
@@ -29,13 +29,13 @@ You can install the released version of tsviz from
 [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
-# install.packages("tsviz")
+install.packages("tsviz")
 ```
 
 Or install the development version from Github:
 
 ``` r
-# devtools::install_packages("donlelef/tsviz")
+devtools::install_github("donlelef/tsviz")
 ```
 
 Once you have installed the package, you do not need to load it with
@@ -53,6 +53,6 @@ prices <- crypto_prices
 
 Then, we can run the addin:
 
-![Tutorial gif](reference/figure/tsviz.gif)
+![Tutorial gif](man/figures/tsviz.gif)
 
 That’s it.
