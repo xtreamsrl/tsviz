@@ -23,7 +23,7 @@ tsviz <- function() {
             label = "Dataset:",
             inputId = "dataset",
             choices = c(get_time_series_data_frames_in_env())
-          ) %>% shinyhelper::helper(content = "Dataset selection"),
+          ) %>% shinyhelper::helper(content = "Dataset_selection"),
           shiny::dataTableOutput("table")
         )
       ),
@@ -93,8 +93,8 @@ tsviz <- function() {
 
   server <- function(input, output, session) {
     data <- shiny::reactive({
-      validate(
-        need(input$dataset != "", "Looks like none of your data.frames contains a time series!")
+      shiny::validate(
+        shiny::need(input$dataset != "", "Looks like none of your data.frames contains a time series!")
       )
       get(input$dataset, envir = .GlobalEnv)
     })
@@ -153,7 +153,7 @@ tsviz <- function() {
     })
 
     output$correlogram <- plotly::renderPlotly({
-      req(input$corr_variable, input$lag)
+      shiny::req(input$corr_variable, input$lag)
 
       (forecast::ggAcf(data()[, input$corr_variable], lag.max = input$lag, type = "correlation") +
         ggplot2::ggtitle("Autocorrelation function (ACF)")) %>%
@@ -162,7 +162,7 @@ tsviz <- function() {
     })
 
     output$partial_correlogram <- plotly::renderPlotly({
-      req(input$corr_variable, input$lag)
+      shiny::req(input$corr_variable, input$lag)
 
       (forecast::ggPacf(data()[, input$corr_variable], lag.max = input$lag) +
         ggplot2::ggtitle("Partial Autocorrelation function (PACF)")) %>%
@@ -171,7 +171,7 @@ tsviz <- function() {
     })
 
     output$line_plot <- plotly::renderPlotly({
-      req(input$time_column, input$line_columns)
+      shiny::req(input$time_column, input$line_columns)
 
       chart <- plotly::plot_ly(
         data(),
@@ -201,7 +201,7 @@ tsviz <- function() {
 
 
     output$scatter_plot <- plotly::renderPlotly({
-      req(input$x_variable, input$y_variables)
+      shiny::req(input$x_variable, input$y_variables)
 
       chart <- plotly::plot_ly(
         data(),
