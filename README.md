@@ -10,6 +10,8 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 [![CRAN
 status](https://www.r-pkg.org/badges/version/tsviz)](https://CRAN.R-project.org/package=tsviz)
 [![CRAN\_Downloads](https://cranlogs.r-pkg.org/badges/tsviz)](https://cran.r-project.org/package=tsviz)
+[![Travis build
+status](https://travis-ci.org/donlelef/tsviz.svg?branch=master)](https://travis-ci.org/donlelef/tsviz)
 <!-- badges: end -->
 
 An RStudio addin to provide easy and interactive time series
@@ -34,7 +36,7 @@ Or install the development version from Github:
 # devtools::install_packages("donlelef/tsviz")
 ```
 
-Once you’ve installed the package, you don’t need to load it with
+Once you have installed the package, you donâ€™t need to load it with
 `library()`, the addins are installed on your machine as part of the
 package install process.
 

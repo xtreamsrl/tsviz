@@ -41,7 +41,7 @@ Or install the development version from Github:
 # devtools::install_packages("donlelef/tsviz")
 ```
 
-Once youâ€™ve installed the package, you donâ€™t need to load it with `library()`, the addins are installed on your machine as part of the package install process.
+Once you have installed the package, you donâ€™t need to load it with `library()`, the addins are installed on your machine as part of the package install process.
 
 ## Example
 
