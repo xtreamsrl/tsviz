@@ -19,37 +19,38 @@ knitr::opts_chunk$set(
 [![CRAN status](https://www.r-pkg.org/badges/version/tsviz)](https://CRAN.R-project.org/package=tsviz)
 <!-- badges: end -->
 
-The goal of tsviz is to ...
+An RStudio addin to provide easy and interactive time series visualization.
+To be visible to the addin, time series must be stored in a dataframe in the global environment, with:
+
+- at least a column of type *Date*
+- at least a column of type *numeric*
 
 ## Installation
 
 You can install the released version of tsviz from [CRAN](https://CRAN.R-project.org) with:
 
-``` r
-install.packages("tsviz")
+```{r cran_install}
+# install.packages("tsviz")
 ```
+
+Or install the development version from Github:
+
+```{r github_install}
+# detools::install_packages("donlelef/tsviz")
+```
+
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+First, let us load some suitable data:
 
-```{r example}
+```{r example, message=FALSE}
 library(tsviz)
-## basic example code
+prices <- crypto_prices
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
+Then, we can run the addin:
 
-```{r cars}
-summary(cars)
-```
+![Tutorial gif](pics/tsviz.gif)
 
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date.
-
-You can also embed plots, for example:
-
-```{r pressure, echo = FALSE}
-plot(pressure)
-```
-
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub!
+That's it.

@@ -1,21 +1,49 @@
-# EXPLORE TIME SERIES
 
-R addin to visualize time series plots
+<!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# How to use it
+# tsviz
 
-  - Import the `ExploreTimeSeries` project into Rstudio
-  - Open the `Build` view and click on `install and restart`
-  - Find the project in the addins list
-  - Import at least a proper dataset for time series analysis
-  - Click on the addins **Explore Time Series** and have fun!
+<!-- badges: start -->
 
-  # Functionalities
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/tsviz)](https://CRAN.R-project.org/package=tsviz)
+<!-- badges: end -->
 
-  > Visualize the dataset of interest
+An RStudio addin to provide easy and interactive time series
+visualization. To be visible to the addin, time series must be stored in
+a dataframe in the global environment, with:
 
-  > Time Series Line Plot
+  - at least a column of type *Date*
+  - at least a column of type *numeric*
 
-  > Scatter plot
-  
-  > Plot autocorrelation and partial autocorrelation functions
+## Installation
+
+You can install the released version of tsviz from
+[CRAN](https://CRAN.R-project.org) with:
+
+``` r
+# install.packages("tsviz")
+```
+
+Or install the development version from Github:
+
+``` r
+# detools::install_packages("donlelef/tsviz")
+```
+
+## Example
+
+First, let us load some suitable data:
+
+``` r
+library(tsviz)
+prices <- crypto_prices
+```
+
+Then, we can run the addin:
+
+![Tutorial gif](pics/tsviz.gif)
+
+That’s it.
