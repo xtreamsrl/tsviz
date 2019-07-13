@@ -1,20 +1,22 @@
+test_env <- new.env()
+
 test_that("finds a dataframe", {
   x <- data.frame(
     l = c("a", "b", "c"),
     n = c(1, 2, 3)
   )
 
-  assign("x", x, envir = .GlobalEnv)
+  assign("x", x, envir = test_env)
 
-  res <- get_data_frames_in_env()
+  res <- get_data_frames_in_env(test_env)
   testthat::expect_length(res, 1)
 
-  rm(list = c("x"), envir = .GlobalEnv)
+  rm(list = c("x"), envir = test_env)
 })
 
 
 test_that("does not crash on no dataframes", {
-  res <- get_data_frames_in_env()
+  res <- get_data_frames_in_env(test_env)
   testthat::expect_length(res, 0)
 })
 
@@ -25,12 +27,12 @@ test_that("finds a tibble", {
     n = c(1, 2, 3)
   ) %>% dplyr::as_tibble()
 
-  assign("x", x, envir = .GlobalEnv)
+  assign("x", x, envir = test_env)
 
-  res <- get_data_frames_in_env()
+  res <- get_data_frames_in_env(test_env)
   testthat::expect_length(res, 1)
 
-  rm(list = c("x"), envir = .GlobalEnv)
+  rm(list = c("x"), envir = test_env)
 })
 
 test_that("finds a time series dataframe", {
@@ -39,10 +41,10 @@ test_that("finds a time series dataframe", {
     n = c(1, 2)
   )
 
-  assign("x", x, envir = .GlobalEnv)
+  assign("x", x, envir = test_env)
 
-  res <- get_time_series_data_frames_in_env()
+  res <- get_time_series_data_frames_in_env(test_env)
   testthat::expect_length(res, 1)
 
-  rm(list = c("x"), envir = .GlobalEnv)
+  rm(list = c("x"), envir = test_env)
 })
