@@ -37,16 +37,17 @@ tsviz <- function() {
             choices = NULL
           ),
           shiny::selectizeInput(
-            label = "Chart ariables:",
+            label = "Chart variables:",
             inputId = "line_columns",
             choices = NULL,
             multiple = TRUE
           ),
+          shiny::checkboxInput("line_normalize", "Normalize"),
           miniUI::miniContentPanel(plotly::plotlyOutput("line_plot"))
         )
       ),
 
-      miniUI::miniTabPanel("ScatterPlot",
+      miniUI::miniTabPanel("Scatter plot",
         icon = shiny::icon("braille"),
         miniUI::miniContentPanel(
           shiny::selectInput(
@@ -60,10 +61,10 @@ tsviz <- function() {
             choices = NULL,
             multiple = TRUE
           ),
+          shiny::checkboxInput("scatter_normalize", "Normalize"),
           miniUI::miniContentPanel(plotly::plotlyOutput("scatter_plot"))
         )
       ),
-
 
       miniUI::miniTabPanel("Correlogram",
         icon = shiny::icon("bar-chart"),
@@ -173,8 +174,15 @@ tsviz <- function() {
     output$line_plot <- plotly::renderPlotly({
       shiny::req(input$time_column, input$line_columns)
 
+      plt_data <- data()
+
+      if (input$line_normalize) {
+        plt_data <- plt_data %>%
+          dplyr::mutate_if(is.numeric, function(x) (x - min(x)) / (max(x) - min(x)))
+      }
+
       chart <- plotly::plot_ly(
-        data(),
+        plt_data,
         x = ~ get(input$time_column),
         y = ~ get(input$line_columns[1]),
         type = "scatter",
@@ -186,7 +194,7 @@ tsviz <- function() {
         more_cols <- input$line_columns[2:length(input$line_columns)]
         for (c in more_cols) {
           chart <- chart %>%
-            plotly::add_lines(y = data()[[c]], type = "scatter", mode = "lines", name = c)
+            plotly::add_lines(y = plt_data[[c]], type = "scatter", mode = "lines", name = c)
         }
       }
 
@@ -203,8 +211,15 @@ tsviz <- function() {
     output$scatter_plot <- plotly::renderPlotly({
       shiny::req(input$x_variable, input$y_variables)
 
+      plt_data <- data()
+
+      if (input$scatter_normalize) {
+        plt_data <- plt_data %>%
+          dplyr::mutate_if(is.numeric, function(x) (x - min(x)) / (max(x) - min(x)))
+      }
+
       chart <- plotly::plot_ly(
-        data(),
+        plt_data,
         x = ~ get(input$x_variable),
         y = ~ get(input$y_variables[1]),
         type = "scatter",
