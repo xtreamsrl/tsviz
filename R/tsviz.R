@@ -20,7 +20,7 @@ tsviz <- function() {
           shiny::selectInput(
             label = "Dataset:",
             inputId = "dataset",
-            choices = c(get_data_frames_in_env())
+            choices = c(get_time_series_data_frames_in_env())
           ),
           shiny::dataTableOutput("table")
         )
@@ -91,17 +91,13 @@ tsviz <- function() {
       get(input$dataset, envir = .GlobalEnv)
     })
 
-    time_columns <- shiny::reactive({
-      data() %>%
-        dplyr::select_if(is.Date) %>%
-        colnames()
-    })
+    time_columns <- shiny::reactive(
+      get_columns_by_type_match(data(), lubridate::is.Date)
+    )
 
-    numeric_columns <- shiny::reactive({
-      data() %>%
-        dplyr::select_if(is.numeric) %>%
-        colnames()
-    })
+    numeric_columns <- shiny::reactive(
+      get_columns_by_type_match(data(), is.numeric)
+    )
 
     shiny::observe({
       shiny::updateSelectInput(
