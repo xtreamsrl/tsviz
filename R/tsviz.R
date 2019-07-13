@@ -10,7 +10,9 @@
 #' @export
 tsviz <- function() {
   ui <- miniUI::miniPage(
-    miniUI::gadgetTitleBar("tsviz - time series visualization", left = NULL, right = NULL),
+    miniUI::gadgetTitleBar("tsviz - time series visualization",
+      left = NULL, right = NULL
+    ),
 
     miniUI::miniTabstripPanel(
       miniUI::miniTabPanel("data",
@@ -21,7 +23,7 @@ tsviz <- function() {
             label = "Dataset:",
             inputId = "dataset",
             choices = c(get_time_series_data_frames_in_env())
-          ) %>% shinyhelper::helper(content = 'Dataset selection'),
+          ) %>% shinyhelper::helper(content = "Dataset selection"),
           shiny::dataTableOutput("table")
         )
       ),
@@ -73,7 +75,11 @@ tsviz <- function() {
               inputId = "corr_variable",
               choices = NULL
             ),
-            shiny::sliderInput(inputId = "lag", label = "Lag variable", min = 10, max = 100, value = 30),
+            shiny::sliderInput(
+              inputId = "lag",
+              label = "Lag variable",
+              min = 10, max = 100, value = 30
+            ),
             shiny::fillRow(
               miniUI::miniContentPanel(plotly::plotlyOutput("correlogram")),
               miniUI::miniContentPanel(plotly::plotlyOutput("partial_correlogram"))

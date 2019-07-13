@@ -1,5 +1,4 @@
 test_that("finds a dataframe", {
-
   x <- data.frame(
     l = c("a", "b", "c"),
     n = c(1, 2, 3)
@@ -10,7 +9,7 @@ test_that("finds a dataframe", {
   res <- get_data_frames_in_env()
   testthat::expect_length(res, 1)
 
-  rm(list=c('x'), envir = .GlobalEnv)
+  rm(list = c("x"), envir = .GlobalEnv)
 })
 
 
@@ -21,7 +20,6 @@ test_that("does not crash on no dataframes", {
 
 
 test_that("finds a tibble", {
-
   x <- data.frame(
     l = c("a", "b", "c"),
     n = c(1, 2, 3)
@@ -32,13 +30,12 @@ test_that("finds a tibble", {
   res <- get_data_frames_in_env()
   testthat::expect_length(res, 1)
 
-  rm(list=c('x'), envir = .GlobalEnv)
+  rm(list = c("x"), envir = .GlobalEnv)
 })
 
 test_that("finds a time series dataframe", {
-
   x <- data.frame(
-    d = c(lubridate::ymd('2018-01-01'), lubridate::ymd('2018-01-02')),
+    d = c(lubridate::ymd("2018-01-01"), lubridate::ymd("2018-01-02")),
     n = c(1, 2)
   )
 
@@ -47,5 +44,5 @@ test_that("finds a time series dataframe", {
   res <- get_time_series_data_frames_in_env()
   testthat::expect_length(res, 1)
 
-  rm(list=c('x'), envir = .GlobalEnv)
+  rm(list = c("x"), envir = .GlobalEnv)
 })
