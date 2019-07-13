@@ -2,6 +2,7 @@ image: r-base
 
 test:
   script:
+    - apt-get update
     - apt-get install libcurl4-openssl-dev libssl-dev
     - R -e 'install.packages(c("dplyr", "lubridate", "plotly", "shiny", "miniUI", "forecast", "ggplot2", "magrittr"))'
     - R CMD build . --no-build-vignettes --no-manual
