@@ -6,3 +6,4 @@
 ^\.github$
 ^\.gitlab-ci\.yml$
 ^\.travis\.yml$
+^data-raw$

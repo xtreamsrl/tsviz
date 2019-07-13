@@ -14,6 +14,8 @@ status](https://www.r-pkg.org/badges/version/tsviz)](https://CRAN.R-project.org/
 status](https://travis-ci.org/donlelef/tsviz.svg?branch=master)](https://travis-ci.org/donlelef/tsviz)
 <!-- badges: end -->
 
+<img src="reference/figure/tsviz.png" align="right"/>
+
 An RStudio addin to provide easy and interactive time series
 visualization. To be visible to the addin, time series must be stored in
 a dataframe in the global environment, with:
@@ -36,7 +38,7 @@ Or install the development version from Github:
 # devtools::install_packages("donlelef/tsviz")
 ```
 
-Once you have installed the package, you donâ€™t need to load it with
+Once you have installed the package, you do not need to load it with
 `library()`, the addins are installed on your machine as part of the
 package install process.
 
