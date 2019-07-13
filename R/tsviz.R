@@ -7,6 +7,7 @@
 #' - one of more numeric columns
 #'
 #' @importFrom forecast Acf
+#'
 #' @export
 tsviz <- function() {
   ui <- miniUI::miniPage(
@@ -31,55 +32,67 @@ tsviz <- function() {
       miniUI::miniTabPanel("Line chart",
         icon = shiny::icon("chart-line"),
         miniUI::miniContentPanel(
-          shiny::selectInput(
-            label = "Time variable",
-            inputId = "time_column",
-            choices = NULL
-          ),
-          shiny::selectizeInput(
-            label = "Chart variables:",
-            inputId = "line_columns",
-            choices = NULL,
-            multiple = TRUE
-          ),
-          shiny::checkboxInput("line_normalize", "Normalize"),
-          miniUI::miniContentPanel(plotly::plotlyOutput("line_plot"))
+          shiny::fillCol(
+            flex = c(2, 8),
+            shiny::fillRow(
+              shiny::selectInput(
+                label = "Time variable",
+                inputId = "time_column",
+                choices = NULL
+              ),
+              shiny::selectizeInput(
+                label = "Chart variables:",
+                inputId = "line_columns",
+                choices = NULL,
+                multiple = TRUE
+              ),
+              shiny::checkboxInput("line_normalize", "Normalize", value = TRUE)
+            ),
+            miniUI::miniContentPanel(plotly::plotlyOutput("line_plot"))
+          )
         )
       ),
 
       miniUI::miniTabPanel("Scatter plot",
         icon = shiny::icon("braille"),
         miniUI::miniContentPanel(
-          shiny::selectInput(
-            label = "X variable",
-            inputId = "x_variable",
-            choices = NULL
-          ),
-          shiny::selectizeInput(
-            label = "Y variables:",
-            inputId = "y_variables",
-            choices = NULL,
-            multiple = TRUE
-          ),
-          shiny::checkboxInput("scatter_normalize", "Normalize"),
-          miniUI::miniContentPanel(plotly::plotlyOutput("scatter_plot"))
+          shiny::fillCol(
+            flex = c(2, 8),
+            shiny::fillRow(
+              shiny::selectInput(
+                label = "X variable",
+                inputId = "x_variable",
+                choices = NULL
+              ),
+              shiny::selectizeInput(
+                label = "Y variables:",
+                inputId = "y_variables",
+                choices = NULL,
+                multiple = TRUE
+              ),
+              shiny::checkboxInput("scatter_normalize", "Normalize", value = TRUE)
+            ),
+            miniUI::miniContentPanel(plotly::plotlyOutput("scatter_plot"))
+          )
         )
       ),
 
       miniUI::miniTabPanel("Correlogram",
         icon = shiny::icon("bar-chart"),
-
-        shiny::fillCol(
-          miniUI::miniContentPanel(
-            shiny::selectInput(
-              label = "Variable",
-              inputId = "corr_variable",
-              choices = NULL
-            ),
-            shiny::sliderInput(
-              inputId = "lag",
-              label = "Lag variable",
-              min = 10, max = 100, value = 30
+        miniUI::miniContentPanel(
+          shiny::fillCol(
+            flex = c(2, 8),
+            shiny::fillRow(
+              shiny::selectInput(
+                label = "Variable:",
+                inputId = "corr_variable",
+                choices = NULL
+              ),
+              shiny::sliderInput(
+                inputId = "lag",
+                label = "Lag:",
+                min = 10, max = 100, value = 30
+              )
             ),
             shiny::fillRow(
               miniUI::miniContentPanel(plotly::plotlyOutput("correlogram")),
@@ -251,16 +264,22 @@ tsviz <- function() {
         plotly::config(displaylogo = FALSE)
     })
 
-    output$table <- shiny::renderDataTable(data())
+    output$table <- shiny::renderDataTable(
+      data(),
+      options = list(
+        lengthMenu = list(c(10, 100, -1), c("10", "100", "All")),
+        pageLength = 10
+      )
+    )
 
     shinyhelper::observe_helpers(help_dir = "man/helpfiles/")
   }
 
 
   viewer <- shiny::dialogViewer(
-    dialogName = "Visualize Time Series",
-    height = 700,
-    width = 1000
+    dialogName = "tsviz",
+    height = 800,
+    width = 1200
   )
 
 
