@@ -1,5 +1,5 @@
 Package: tsviz
-Title: Easy and interactive time series visualization
+Title: Easy and Interactive Time Series Visualization
 Version: 0.0.0.9000
 Authors@R: 
    c(person(
@@ -12,7 +12,7 @@ Authors@R:
         "Fabbiani", 
         email = "emanuele.fabbiani@xtreamers.io", 
         role = "aut"))
-Description: An RStudio addin to visualize time series. Time series are supported to be contaied in a data.frame object wich has a single column of type date. Plotly is used to create interactive charts.
+Description: An RStudio addin to visualize time series. Time series are supported to be contained in a data.frame object which has a single column of type date. Plotly is used to create interactive charts.
 URL: https://xtreamers.io
 BugReports: https://xtreamers.io
 License: MIT + file LICENSE
