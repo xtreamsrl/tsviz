@@ -6,15 +6,15 @@ Authors@R:
         "Marta", 
         "Peroni", 
         email = "marta.peroni@xtreamers.io", 
-        role = "cre"),
+        role = "aut"),
      person(
         "Emanuele", 
         "Fabbiani", 
         email = "emanuele.fabbiani@xtreamers.io", 
-        role = "aut"))
+        role = "cre"))
 Description: An RStudio addin to visualize time series. Time series are supported to be contained in a data.frame object which has a single column of type date. Plotly is used to create interactive charts.
-URL: https://xtreamers.io
-BugReports: https://xtreamers.io
+URL: https://github.com/donlelef/tsviz
+BugReports: https://github.com/donlelef/tsviz/issues
 License: MIT + file LICENSE
 Suggests: 
     testthat (>= 2.1.0),
@@ -33,5 +33,5 @@ Imports:
     miniUI (>= 0.1.1),
     forecast (>= 8.7),
     ggplot2 (>= 3.0),
-    magrittr,
+    magrittr (>= 1.5),
     shinyhelper (>= 0.3.1)
