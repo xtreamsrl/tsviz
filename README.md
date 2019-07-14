@@ -7,11 +7,14 @@
 
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
-[![CRAN
-status](https://www.r-pkg.org/badges/version/tsviz)](https://CRAN.R-project.org/package=tsviz)
-[![CRAN\_Downloads](https://cranlogs.r-pkg.org/badges/tsviz)](https://cran.r-project.org/package=tsviz)
 [![Travis build
 status](https://travis-ci.org/donlelef/tsviz.svg?branch=master)](https://travis-ci.org/donlelef/tsviz)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/tsviz)](https://CRAN.R-project.org/package=tsviz)
+[![CRAN monthly
+downloads](https://cranlogs.r-pkg.org/badges/tsviz)](https://cran.r-project.org/package=tsviz)
+[![CRAN
+downloads](https://cranlogs.r-pkg.org/badges/grand-total/tsviz)](https://cran.r-project.org/package=tsviz)
 <!-- badges: end -->
 
 <img src="man/figures/tsviz.png" align="right"/>
