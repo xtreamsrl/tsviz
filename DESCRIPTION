@@ -1,6 +1,6 @@
 Package: tsviz
 Title: Easy and Interactive Time Series Visualization
-Version: 0.0.0.9000
+Version: 0.1.0
 Authors@R: 
    c(person(
         "Marta", 
@@ -12,7 +12,7 @@ Authors@R:
         "Fabbiani", 
         email = "emanuele.fabbiani@xtreamers.io", 
         role = "cre"))
-Description: An RStudio addin to visualize time series. Time series are supported to be contained in a data.frame object which has a single column of type date. Plotly is used to create interactive charts.
+Description: An 'RStudio' addin to visualize time series. Time series are supported to be contained in a data.frame object which has a single column of type date. 'Plotly' is used to create interactive charts.
 URL: https://github.com/donlelef/tsviz
 BugReports: https://github.com/donlelef/tsviz/issues
 License: MIT + file LICENSE
