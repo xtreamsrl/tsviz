@@ -8,6 +8,11 @@
 #'
 #' @importFrom forecast Acf
 #'
+#' @examples
+#' \dontrun{
+#' prices <- tsviz::crypto_prices
+#' tsviz::tsviz()
+#' }
 #' @export
 tsviz <- function() {
   ui <- miniUI::miniPage(

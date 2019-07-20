@@ -15,3 +15,9 @@ with the following format:
 \item one of more numeric columns
 }
 }
+\examples{
+\dontrun{
+prices <- tsviz::crypto_prices
+tsviz::tsviz()
+}
+}
