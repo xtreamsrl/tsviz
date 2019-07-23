@@ -9,7 +9,7 @@
 #' @importFrom forecast Acf
 #'
 #' @examples
-#' \if(interactive()){
+#' if(interactive()){
 #' prices <- tsviz::crypto_prices
 #' tsviz::tsviz()
 #' }
