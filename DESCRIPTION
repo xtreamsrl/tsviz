@@ -12,7 +12,7 @@ Authors@R:
         "Fabbiani", 
         email = "emanuele.fabbiani@xtreamers.io", 
         role = "cre"))
-Description: An 'RStudio' addin to visualize time series. Time series are searched in the global environment as data.frame objects with a column of type date and a column of type numberic. Interactive charts are produced using 'plotly' package.
+Description: An 'RStudio' add-in to visualize time series. Time series are searched in the global environment as data.frame objects with a column of type date and a column of type numeric. Interactive charts are produced using 'plotly' package.
 URL: https://github.com/donlelef/tsviz
 BugReports: https://github.com/donlelef/tsviz/issues
 License: MIT + file LICENSE
