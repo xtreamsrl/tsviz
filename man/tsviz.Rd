@@ -16,7 +16,7 @@ with the following format:
 }
 }
 \examples{
-\\if(interactive()){
+if(interactive()){
 prices <- tsviz::crypto_prices
 tsviz::tsviz()
 }
