@@ -8,7 +8,7 @@
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![Travis build
-status](https://travis-ci.org/donlelef/tsviz.svg?branch=master)](https://travis-ci.org/donlelef/tsviz)
+status](https://travis-ci.org/xtreamsrl/tsviz.svg?branch=master)](https://travis-ci.org/donlelef/tsviz)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/tsviz)](https://CRAN.R-project.org/package=tsviz)
 [![CRAN monthly
