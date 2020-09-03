@@ -62,6 +62,8 @@ Then, we can run the addin:
 
 That’s it.
 
+Have a look to the demo performed at erum 2020! Watch on YouTube: https://youtu.be/t8PZbP5b8EM?t=1870.
+
 
 # Who we are
 <img align="left" width="80" height="80" src="https://avatars2.githubusercontent.com/u/38501645?s=450&u=1eb7348ca81f5cd27ce9c02e689f518d903852b1&v=4">
