@@ -15,8 +15,7 @@ status](https://www.r-pkg.org/badges/version/tsviz)](https://CRAN.R-project.org/
 downloads](https://cranlogs.r-pkg.org/badges/tsviz)](https://cran.r-project.org/package=tsviz)
 [![CRAN
 downloads](https://cranlogs.r-pkg.org/badges/grand-total/tsviz)](https://cran.r-project.org/package=tsviz)
-[![Say
-Thanks\!](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/donlelef)
+[![Say Thanks!](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/donlelef@gmail.com)
 <!-- badges: end -->
 
 <img src="man/figures/tsviz.png" align="right"/>
